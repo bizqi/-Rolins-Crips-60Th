@@ -21,96 +21,9 @@
       line-height: 1.6;
     }
 
-    /* ===== LOGIN PAGE ===== */
-    #loginPage {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      background: rgba(5, 15, 35, 0.95);
-      padding: 20px;
-      text-align: center;
-    }
-
-    .login-logo {
-      font-size: 2.6em;
-      color: #00ccff;
-      text-shadow: 0 0 12px rgba(0, 200, 255, 0.8);
-      margin-bottom: 15px;
-    }
-
-    .login-warning {
-      color: #ff6666;
-      background: rgba(30, 0, 0, 0.6);
-      padding: 12px;
-      border-radius: 6px;
-      margin-bottom: 20px;
-      font-size: 0.95em;
-      line-height: 1.5;
-      max-width: 420px;
-    }
-
-    .login-box {
-      background: rgba(10, 25, 50, 0.9);
-      padding: 25px;
-      border: 2px solid #00aaff;
-      width: 100%;
-      max-width: 420px;
-      border-radius: 8px;
-    }
-
-    .login-box input {
-      width: 100%;
-      padding: 14px;
-      margin-bottom: 15px;
-      background: rgba(0, 20, 40, 0.7);
-      border: 1px solid #00aaff;
-      color: white;
-      font-size: 1.1em;
-      border-radius: 6px;
-    }
-
-    .account-list {
-      max-height: 150px;
-      overflow-y: auto;
-      margin-bottom: 15px;
-      text-align: left;
-    }
-
-    .account-item {
-      padding: 8px;
-      background: rgba(0, 50, 100, 0.4);
-      margin: 4px 0;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-
-    .account-item:hover {
-      background: rgba(0, 100, 200, 0.5);
-    }
-
-    .login-btn {
-      width: 100%;
-      padding: 12px;
-      background: #1877f2;
-      color: white;
-      font-size: 1.1em;
-      font-weight: bold;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      margin-top: 10px;
-    }
-
-    /* ===== MAIN APP ===== */
-    #app {
-      display: none;
-    }
-
     header {
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
       padding: 12px 20px;
       background: rgba(5, 15, 35, 0.95);
@@ -123,23 +36,6 @@
       text-shadow: 0 0 8px rgba(0, 200, 255, 0.6);
     }
 
-    .logout-btn {
-      background: #ff3333;
-      color: white;
-      border: none;
-      padding: 8px 16px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: bold;
-      font-size: 0.95em;
-    }
-
-    .logout-btn:disabled {
-      background: #555;
-      cursor: not-allowed;
-    }
-
-    /* ✅ TEKS BERJALAN DENGAN CSS (BUKAN MARQUEE) */
     .marquee-container {
       background: rgba(0, 20, 40, 0.9);
       padding: 8px;
@@ -253,6 +149,48 @@
       margin-bottom: 4px;
     }
 
+    .discord-links {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .discord-link {
+      display: inline-block;
+      padding: 14px 24px;
+      background: #5865F2;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 1.2em;
+      text-align: center;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    .discord-link:hover {
+      background: #4752c4;
+      transform: scale(1.03);
+    }
+
+    /* Audio Player */
+    .audio-section {
+      margin-top: 30px;
+      text-align: center;
+    }
+
+    .audio-section h3 {
+      color: #00ccff;
+      margin-bottom: 15px;
+    }
+
+    .audio-section audio {
+      width: 100%;
+      max-width: 500px;
+      outline: none;
+    }
+
     footer {
       text-align: center;
       padding: 25px;
@@ -265,197 +203,89 @@
 </head>
 <body>
 
-  <!-- LOGIN PAGE -->
-  <div id="loginPage">
-    <div class="login-logo">ROLIN'S CRIPS 60TH</div>
-    <div class="login-warning">
-      ⚠️ JIKA SUDAH BIKIN NAMA DI SINI TIDAK BISA DI GANTI.<br>
-      KASIH NAMA YANG BENER!
+  <header>
+    <div class="header-title">
+      <h1>ROLIN'S CRIPS 60TH</h1>
     </div>
-    <div class="login-box">
-      <div class="account-list" id="accountHistory"></div>
-      <input type="text" id="loginName" placeholder="Atau masukkan nama baru (2-20 karakter)" maxlength="20">
-      <button class="login-btn" id="loginBtn">GUNAKAN NAMA INI</button>
+  </header>
+
+  <div class="marquee-container">
+    <div class="marquee-text">
+      BLUE TIL I DIE | LOYALTY SINCE 1965 | ROLIN'S CRIPS 60TH
     </div>
   </div>
 
-  <!-- MAIN APP -->
-  <div id="app">
-    <header>
-      <div class="header-title">
-        <h1>ROLIN'S CRIPS 60TH</h1>
-      </div>
-      <button class="logout-btn" id="logoutBtn">Ganti Akun</button>
-    </header>
+  <nav class="navbar">
+    <a class="nav-link active" data-target="pentinggi">PENTINGGI</a>
+    <a class="nav-link" data-target="informasi">INFORMASI</a>
+    <a class="nav-link" data-target="asal-usul">ASAL USUL</a>
+    <a class="nav-link" data-target="link-dc">LINK DC</a>
+  </nav>
 
-    <!-- ✅ TEKS BERJALAN DENGAN CSS -->
-    <div class="marquee-container">
-      <div class="marquee-text">
-        BLUE TIL I DIE | LOYALTY SINCE 1965 | ROLIN'S CRIPS 60TH
+  <!-- PENTINGGI -->
+  <section id="pentinggi" class="content-section active">
+    <h2>PENTINGGI</h2>
+    <div style="background:rgba(0,30,60,0.6); padding:15px; margin:15px auto; border-left:3px solid #00aaff; max-width:600px; border-radius:0 8px 8px 0;">
+      <h3>Mateo_Walker Dan Endang_Kostelo</h3><p>Pendiri & pemimpin utama.</p>
+    </div>
+    <div style="background:rgba(0,30,60,0.6); padding:15px; margin:15px auto; border-left:3px solid #00aaff; max-width:600px; border-radius:0 8px 8px 0;">
+      <h3>Ian_Manzy</h3><p>Tangan Kanan.</p>
+    </div>
+    <div style="background:rgba(0,30,60,0.6); padding:15px; margin:15px auto; border-left:3px solid #00aaff; max-width:600px; border-radius:0 8px 8px 0;">
+      <h3>Ridwan_Jhon</h3><p>Tangan kiri.</p>
+    </div>
+  </section>
+
+  <!-- INFORMASI -->
+  <section id="informasi" class="content-section">
+    <h2>INFORMASI</h2>
+    <div class="info-grid">
+      <div class="info-item">
+        <img src="https://i.ibb.co/DfC5thQP/IMG-20241228-200228.jpg" alt="WILAYAH">
+        <div class="label"><strong>WILAYAH</strong>Las Venturas Whitewood</div>
+      </div>
+      <div class="info-item">
+        <img src="https://i.ibb.co/fdScD6Tp/Desain-tanpa-judul-1.png" alt="Identitas">
+        <div class="label"><strong>IDENTITAS</strong>ROLINS</div>
+      </div>
+      <div class="info-item">
+        <img src="https://i.ibb.co/wFX1mjDS/sa-mp-108.png" alt="Tahun">
+        <div class="label"><strong>BERDIRI</strong>1965</div>
+      </div>
+      <div class="info-item">
+        <img src="https://i.ibb.co/9HvVXBR7/IMG-20250804-WA0032.jpg" alt="Logo">
+        <div class="label"><strong>LOGO</strong>Crips 60th</div>
       </div>
     </div>
+  </section>
 
-    <nav class="navbar">
-      <a class="nav-link active" data-target="pentinggi">PENTINGGI</a>
-      <a class="nav-link" data-target="informasi">INFORMASI</a>
-      <a class="nav-link" data-target="asal-usul">ASAL USUL</a>
-      <!-- ❌ BERTANYA DIHAPUS -->
-      <a class="nav-link" data-target="link-dc">LINK DC</a>
-    </nav>
+  <!-- ASAL USUL -->
+  <section id="asal-usul" class="content-section">
+    <h2>ASAL USUL</h2>
+    <p style="text-align:center; font-size:1.15em; color:#e0f0ff; line-height:1.7; padding:0 10px;">
+      Amidst the chaos caused by the pandemic in Las Venturas, where everyone was lost and the economy was collapsing, a group of street youths from the Old Venturas Strip formed a gang called ROLIN'S CRIPS 60TH, led by the calm but sharp Mateo, with his second-in-command, Endang, a brutal but loyal figure. Starting out hanging out in the back alleys of closed casinos, they began to unite hopeless street kids, forming strong bonds, marking their territory with blue, and maintaining strict discipline. This gang is not only a symbol of rebellion, but also resistance to social injustice during the crisis. The name ROLIN'S CRIPS 60TH slowly echoed throughout Las Venturas as one of the most respected gangs during the pandemic.
+    </p>
+  </section>
 
-    <!-- PENTINGGI -->
-    <section id="pentinggi" class="content-section active">
-      <h2>PENTINGGI</h2>
-      <div style="background:rgba(0,30,60,0.6); padding:15px; margin:15px auto; border-left:3px solid #00aaff; max-width:600px; border-radius:0 8px 8px 0;">
-        <h3>Mateo_Walker Dan Endang_Kostelo</h3><p>Pendiri & pemimpin utama.</p>
-      </div>
-      <div style="background:rgba(0,30,60,0.6); padding:15px; margin:15px auto; border-left:3px solid #00aaff; max-width:600px; border-radius:0 8px 8px 0;">
-        <h3>Ian_Manzy</h3><p>Tangan Kanan.</p>
-      </div>
-      <div style="background:rgba(0,30,60,0.6); padding:15px; margin:15px auto; border-left:3px solid #00aaff; max-width:600px; border-radius:0 8px 8px 0;">
-        <h3>Ridwan_Jhon</h3><p>Tangan kiri.</p>
-      </div>
-    </section>
-
-    <!-- INFORMASI -->
-    <section id="informasi" class="content-section">
-      <h2>INFORMASI</h2>
-      <div class="info-grid">
-        <div class="info-item">
-          <img src="https://i.ibb.co/DfC5thQP/IMG-20241228-200228.jpg" alt="WILAYAH">
-          <div class="label"><strong>WILAYAH</strong>Las Venturas Whitewood</div>
-        </div>
-        <div class="info-item">
-          <img src="https://i.ibb.co/fdScD6Tp/Desain-tanpa-judul-1.png" alt="Identitas">
-          <div class="label"><strong>IDENTITAS</strong>ROLINS</div>
-        </div>
-        <div class="info-item">
-          <img src="https://i.ibb.co/wFX1mjDS/sa-mp-108.png" alt="Tahun">
-          <div class="label"><strong>BERDIRI</strong>1965</div>
-        </div>
-        <div class="info-item">
-          <img src="https://i.ibb.co/9HvVXBR7/IMG-20250804-WA0032.jpg" alt="Logo">
-          <div class="label"><strong>LOGO</strong>Crips 60th</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ASAL USUL -->
-    <section id="asal-usul" class="content-section">
-      <h2>ASAL USUL</h2>
-      <p style="text-align:center; font-size:1.15em; color:#e0f0ff; line-height:1.7; padding:0 10px;">
-        Amidst the chaos caused by the pandemic in Las Venturas, where everyone was lost and the economy was collapsing, a group of street youths from the Old Venturas Strip formed a gang called ROLIN'S CRIPS 60TH, led by the calm but sharp Mateo, with his second-in-command, Endang, a brutal but loyal figure. Starting out hanging out in the back alleys of closed casinos, they began to unite hopeless street kids, forming strong bonds, marking their territory with blue, and maintaining strict discipline. This gang is not only a symbol of rebellion, but also resistance to social injustice during the crisis. The name ROLIN'S CRIPS 60TH slowly echoed throughout Las Venturas as one of the most respected gangs during the pandemic.
-      </p>
-    </section>
-
-    <!-- LINK DISCORD -->
-    <section id="link-dc" class="content-section">
-      <h2>DISCORD</h2>
-      <p style="text-align:center; margin-bottom:20px;">Klik tombol di bawah untuk bergabung!</p>
-      <!-- ✅ Perbaiki spasi di URL -->
-      <a href="https://discord.gg/4kkPw3zytW" target="_blank" 
-         style="display:inline-block; padding:12px 24px; background:#5865F2; color:white; text-decoration:none; border-radius:8px; font-weight:bold; font-size:1.2em;">
-        JOIN DISCORD
+  <!-- LINK DISCORD -->
+  <section id="link-dc" class="content-section">
+    <h2>DISCORD</h2>
+    <p style="text-align:center; margin-bottom:20px;">Bergabunglah dengan komunitas kami!</p>
+    <div class="discord-links">
+      <a href="https://discord.gg/4kkPw3zytW" target="_blank" class="discord-link">
+        DC ROLINS
       </a>
-    </section>
+      <a href="https://discord.gg/wXmggFAX9J" target="_blank" class="discord-link">
+        BADSIDE WARGA INDO
+      </a>
+    </div>
 
-    <footer>
-      <p>© 2025 ROLIN'S CRIPS 60TH – Blue Til I Die.</p>
-    </footer>
-  </div>
+  <footer>
+    <p>© 2025 ROLIN'S CRIPS 60TH – Blue Til I Die.</p>
+  </footer>
 
   <script>
-    const loginPage = document.getElementById('loginPage');
-    const app = document.getElementById('app');
-    const loginBtn = document.getElementById('loginBtn');
-    const logoutBtn = document.getElementById('logoutBtn');
-    const loginNameInput = document.getElementById('loginName');
-    const accountHistory = document.getElementById('accountHistory');
-
-    function loadAccountHistory() {
-      const accounts = JSON.parse(localStorage.getItem('accountHistory') || '[]');
-      accountHistory.innerHTML = '';
-      if (accounts.length > 0) {
-        const title = document.createElement('div');
-        title.textContent = 'Pilih akun lama:';
-        title.style.marginBottom = '10px';
-        title.style.fontWeight = 'bold';
-        accountHistory.appendChild(title);
-
-        accounts.forEach(acc => {
-          const div = document.createElement('div');
-          div.className = 'account-item';
-          div.textContent = acc;
-          div.onclick = () => useAccount(acc);
-          accountHistory.appendChild(div);
-        });
-      }
-    }
-
-    function useAccount(name) {
-      localStorage.setItem('userName', name);
-      window.userName = name;
-      loginPage.style.display = 'none';
-      app.style.display = 'block';
-    }
-
-    const savedName = localStorage.getItem('userName');
-    const switchCount = parseInt(localStorage.getItem('switchCount') || '0');
-
-    if (savedName) {
-      window.userName = savedName;
-      loginPage.style.display = 'none';
-      app.style.display = 'block';
-    } else {
-      loadAccountHistory();
-    }
-
-    if (switchCount >= 5) {
-      logoutBtn.disabled = true;
-      logoutBtn.title = 'Batas ganti akun: 5x';
-    }
-
-    loginBtn.addEventListener('click', () => {
-      const name = loginNameInput.value.trim();
-      if (name.length >= 2 && name.length <= 20) {
-        let accounts = JSON.parse(localStorage.getItem('accountHistory') || '[]');
-        if (!accounts.includes(name)) {
-          accounts.unshift(name);
-          if (accounts.length > 10) accounts.pop();
-          localStorage.setItem('accountHistory', JSON.stringify(accounts));
-        }
-        useAccount(name);
-      } else {
-        alert('Nama harus 2–20 karakter!');
-      }
-    });
-
-    loginNameInput.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') loginBtn.click();
-    });
-
-    logoutBtn.addEventListener('click', () => {
-      let count = parseInt(localStorage.getItem('switchCount') || '0');
-      if (count >= 5) {
-        alert('Kamu sudah ganti akun 5 kali. Tidak bisa ganti lagi.');
-        return;
-      }
-      if (confirm('Anda yakin mau ganti akun?\nBatas ganti akun: 5x.')) {
-        count++;
-        localStorage.setItem('switchCount', count.toString());
-        localStorage.removeItem('userName');
-        app.style.display = 'none';
-        loginPage.style.display = 'flex';
-        loginNameInput.value = '';
-        loadAccountHistory();
-        if (count >= 5) {
-          logoutBtn.disabled = true;
-          logoutBtn.title = 'Batas ganti akun: 5x';
-        }
-      }
-    });
-
-    // === NAVIGASI ===
+    // Navigasi
     document.querySelectorAll('.nav-link').forEach(link => {
       link.addEventListener('click', function (e) {
         e.preventDefault();
