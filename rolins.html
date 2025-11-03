@@ -90,7 +90,7 @@
       background: rgba(0, 100, 200, 0.5);
     }
 
-    .login-btn, .use-btn {
+    .login-btn {
       width: 100%;
       padding: 12px;
       background: #1877f2;
@@ -139,19 +139,29 @@
       cursor: not-allowed;
     }
 
+    /* ✅ TEKS BERJALAN DENGAN CSS (BUKAN MARQUEE) */
     .marquee-container {
       background: rgba(0, 20, 40, 0.9);
       padding: 8px;
       border-bottom: 2px solid #00aaff;
       margin-bottom: 12px;
+      overflow: hidden;
+      white-space: nowrap;
     }
 
     .marquee-text {
+      display: inline-block;
       color: #00e0ff;
       font-size: 1.1em;
       font-weight: bold;
       letter-spacing: 2px;
-      white-space: nowrap;
+      padding-left: 100%;
+      animation: scrollText 15s linear infinite;
+    }
+
+    @keyframes scrollText {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
     }
 
     .navbar {
@@ -210,7 +220,6 @@
       font-size: 1.8em;
     }
 
-    /* ✅ FOTO DI INFORMASI — UKURAN KONSISTEN */
     .info-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -224,19 +233,12 @@
     }
 
     .info-item img {
- 
       width: 100%;
- 
-      height: auto; /* ✅ Ikuti rasio asli */
-  
-      object-fit: fill; /* Tidak perlu, karena height: auto */
-  
+      height: auto;
       border: 2px solid #00aaff;
-  
       border-radius: 0;
-  
       display: block;
-}
+    }
 
     .info-item .label {
       margin-top: 10px;
@@ -249,74 +251,6 @@
       display: block;
       font-size: 1.1em;
       margin-bottom: 4px;
-    }
-
-    /* CHAT */
-    #chatBox {
-      height: 300px;
-      overflow-y: auto;
-      background: rgba(0, 20, 40, 0.6);
-      border: 1px solid #00aaff;
-      padding: 10px;
-      margin-top: 15px;
-      border-radius: 0;
-    }
-
-    .chat-message {
-      padding: 10px;
-      margin-bottom: 10px;
-      background: rgba(0, 100, 180, 0.4);
-      border-radius: 8px;
-      position: relative;
-      word-wrap: break-word;
-    }
-
-    .chat-message.own {
-      background: rgba(0, 150, 136, 0.5);
-      margin-left: 20%;
-    }
-
-    .delete-btn {
-      position: absolute;
-      top: 5px;
-      right: 8px;
-      background: #ff4444;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      width: 24px;
-      height: 24px;
-      font-size: 12px;
-      cursor: pointer;
-      display: none;
-    }
-
-    .chat-message:hover .delete-btn {
-      display: block;
-    }
-
-    .chat-form textarea {
-      padding: 10px;
-      background: rgba(0, 30, 60, 0.7);
-      border: 1px solid #00aaff;
-      color: white;
-      border-radius: 6px;
-      font-family: inherit;
-      resize: vertical;
-      min-height: 60px;
-      width: 100%;
-    }
-
-    .send-btn {
-      margin-top: 10px;
-      padding: 12px;
-      background: #00aaff;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      font-weight: bold;
-      cursor: pointer;
-      width: 100%;
     }
 
     footer {
@@ -354,17 +288,18 @@
       <button class="logout-btn" id="logoutBtn">Ganti Akun</button>
     </header>
 
+    <!-- ✅ TEKS BERJALAN DENGAN CSS -->
     <div class="marquee-container">
-      <marquee class="marquee-text" behavior="scroll" direction="left" scrollamount="4">
+      <div class="marquee-text">
         BLUE TIL I DIE | LOYALTY SINCE 1965 | ROLIN'S CRIPS 60TH
-      </marquee>
+      </div>
     </div>
 
     <nav class="navbar">
       <a class="nav-link active" data-target="pentinggi">PENTINGGI</a>
       <a class="nav-link" data-target="informasi">INFORMASI</a>
       <a class="nav-link" data-target="asal-usul">ASAL USUL</a>
-      <a class="nav-link" data-target="bertanya">BERTANYA</a>
+      <!-- ❌ BERTANYA DIHAPUS -->
       <a class="nav-link" data-target="link-dc">LINK DC</a>
     </nav>
 
@@ -386,13 +321,12 @@
     <section id="informasi" class="content-section">
       <h2>INFORMASI</h2>
       <div class="info-grid">
-        <!-- Ganti URL di bawah ini dengan link fotomu -->
         <div class="info-item">
           <img src="https://i.ibb.co/DfC5thQP/IMG-20241228-200228.jpg" alt="WILAYAH">
           <div class="label"><strong>WILAYAH</strong>Las Venturas Whitewood</div>
         </div>
         <div class="info-item">
-         <img src="https://i.ibb.co/fdScD6Tp/Desain-tanpa-judul-1.png" alt="Warna">
+          <img src="https://i.ibb.co/fdScD6Tp/Desain-tanpa-judul-1.png" alt="Identitas">
           <div class="label"><strong>IDENTITAS</strong>ROLINS</div>
         </div>
         <div class="info-item">
@@ -400,7 +334,7 @@
           <div class="label"><strong>BERDIRI</strong>1965</div>
         </div>
         <div class="info-item">
-         <img src="https://i.ibb.co/9HvVXBR7/IMG-20250804-WA0032.jpg" alt="Logo">
+          <img src="https://i.ibb.co/9HvVXBR7/IMG-20250804-WA0032.jpg" alt="Logo">
           <div class="label"><strong>LOGO</strong>Crips 60th</div>
         </div>
       </div>
@@ -414,21 +348,11 @@
       </p>
     </section>
 
-    <!-- BERTANYA -->
-    <section id="bertanya" class="content-section">
-      <h2>BERTANYA</h2>
-      <p style="text-align:center; margin-bottom:15px;">Kirim pesanmu di sini. Semua orang bisa bertanya!</p>
-      <div id="chatBox"></div>
-      <form id="chatForm" class="chat-form">
-        <textarea id="chatMessage" placeholder="Tulis pesan atau pertanyaanmu..." required maxlength="200"></textarea>
-        <button type="submit" class="send-btn">KIRIM</button>
-      </form>
-    </section>
-
     <!-- LINK DISCORD -->
     <section id="link-dc" class="content-section">
       <h2>DISCORD</h2>
       <p style="text-align:center; margin-bottom:20px;">Klik tombol di bawah untuk bergabung!</p>
+      <!-- ✅ Perbaiki spasi di URL -->
       <a href="https://discord.gg/4kkPw3zytW" target="_blank" 
          style="display:inline-block; padding:12px 24px; background:#5865F2; color:white; text-decoration:none; border-radius:8px; font-weight:bold; font-size:1.2em;">
         JOIN DISCORD
@@ -448,7 +372,6 @@
     const loginNameInput = document.getElementById('loginName');
     const accountHistory = document.getElementById('accountHistory');
 
-    // === LOAD AKUN LAMA ===
     function loadAccountHistory() {
       const accounts = JSON.parse(localStorage.getItem('accountHistory') || '[]');
       accountHistory.innerHTML = '';
@@ -474,10 +397,8 @@
       window.userName = name;
       loginPage.style.display = 'none';
       app.style.display = 'block';
-      loadChat();
     }
 
-    // === CEK LOGIN SAAT BUKA ===
     const savedName = localStorage.getItem('userName');
     const switchCount = parseInt(localStorage.getItem('switchCount') || '0');
 
@@ -485,7 +406,6 @@
       window.userName = savedName;
       loginPage.style.display = 'none';
       app.style.display = 'block';
-      loadChat();
     } else {
       loadAccountHistory();
     }
@@ -495,15 +415,13 @@
       logoutBtn.title = 'Batas ganti akun: 5x';
     }
 
-    // === LOGIN BARU ===
     loginBtn.addEventListener('click', () => {
       const name = loginNameInput.value.trim();
       if (name.length >= 2 && name.length <= 20) {
-        // Simpan ke riwayat
         let accounts = JSON.parse(localStorage.getItem('accountHistory') || '[]');
         if (!accounts.includes(name)) {
           accounts.unshift(name);
-          if (accounts.length > 10) accounts.pop(); // batas 10 akun lama
+          if (accounts.length > 10) accounts.pop();
           localStorage.setItem('accountHistory', JSON.stringify(accounts));
         }
         useAccount(name);
@@ -516,7 +434,6 @@
       if (e.key === 'Enter') loginBtn.click();
     });
 
-    // === GANTI AKUN ===
     logoutBtn.addEventListener('click', () => {
       let count = parseInt(localStorage.getItem('switchCount') || '0');
       if (count >= 5) {
@@ -535,48 +452,6 @@
           logoutBtn.disabled = true;
           logoutBtn.title = 'Batas ganti akun: 5x';
         }
-      }
-    });
-
-    // === CHAT ===
-    function loadChat() {
-      const chatBox = document.getElementById('chatBox');
-      chatBox.innerHTML = '';
-      const messages = JSON.parse(localStorage.getItem('chatMessages') || '[]');
-      messages.forEach((msg, index) => {
-        const msgDiv = document.createElement('div');
-        msgDiv.className = 'chat-message ' + (msg.name === window.userName ? 'own' : '');
-        msgDiv.innerHTML = `
-          <strong>[${msg.time}] ${msg.name}:</strong> ${msg.text}
-          ${msg.name === window.userName ? `<button class="delete-btn" data-index="${index}">🗑️</button>` : ''}
-        `;
-        chatBox.appendChild(msgDiv);
-      });
-
-      document.querySelectorAll('.delete-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-          const index = parseInt(btn.getAttribute('data-index'));
-          let msgs = JSON.parse(localStorage.getItem('chatMessages') || '[]');
-          msgs.splice(index, 1);
-          localStorage.setItem('chatMessages', JSON.stringify(msgs));
-          loadChat();
-        });
-      });
-
-      chatBox.scrollTop = chatBox.scrollHeight;
-    }
-
-    document.getElementById('chatForm')?.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const text = document.getElementById('chatMessage').value.trim();
-      if (text && window.userName) {
-        const now = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-        const newMsg = { name: window.userName, text, time: now };
-        const messages = JSON.parse(localStorage.getItem('chatMessages') || '[]');
-        messages.push(newMsg);
-        localStorage.setItem('chatMessages', JSON.stringify(messages));
-        loadChat();
-        document.getElementById('chatForm').reset();
       }
     });
 
