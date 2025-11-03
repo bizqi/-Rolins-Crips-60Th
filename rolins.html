@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ROLIN'S CRIPS 60TH</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      user-select: text;
+    }
+
+    body {
+      background-color: #000;
+      background-image: radial-gradient(circle, rgba(10, 20, 40, 0.9), #000),
+                        url('https://www.transparenttextures.com/patterns/black-felt.png');
+      color: #cce6ff;
+      font-family: 'Segoe UI', sans-serif;
+      line-height: 1.6;
+    }
+
+    /* ===== LOGIN PAGE ===== */
+    #loginPage {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: rgba(5, 15, 35, 0.95);
+      padding: 20px;
+      text-align: center;
+    }
+
+    .login-logo {
+      font-size: 2.6em;
+      color: #00ccff;
+      text-shadow: 0 0 12px rgba(0, 200, 255, 0.8);
+      margin-bottom: 15px;
+    }
+
+    .login-warning {
+      color: #ff6666;
+      background: rgba(30, 0, 0, 0.6);
+      padding: 12px;
+      border-radius: 6px;
+      margin-bottom: 20px;
+      font-size: 0.95em;
+      line-height: 1.5;
+      max-width: 420px;
+    }
+
+    .login-box {
+      background: rgba(10, 25, 50, 0.9);
+      padding: 25px;
+      border: 2px solid #00aaff;
+      width: 100%;
+      max-width: 420px;
+      border-radius: 8px;
+    }
+
+    .login-box input {
+      width: 100%;
+      padding: 14px;
+      margin-bottom: 15px;
+      background: rgba(0, 20, 40, 0.7);
+      border: 1px solid #00aaff;
+      color: white;
+      font-size: 1.1em;
+      border-radius: 6px;
+    }
+
+    .account-list {
+      max-height: 150px;
+      overflow-y: auto;
+      margin-bottom: 15px;
+      text-align: left;
+    }
+
+    .account-item {
+      padding: 8px;
+      background: rgba(0, 50, 100, 0.4);
+      margin: 4px 0;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .account-item:hover {
+      background: rgba(0, 100, 200, 0.5);
+    }
+
+    .login-btn, .use-btn {
+      width: 100%;
+      padding: 12px;
+      background: #1877f2;
+      color: white;
+      font-size: 1.1em;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    /* ===== MAIN APP ===== */
+    #app {
+      display: none;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 20px;
+      background: rgba(5, 15, 35, 0.95);
+      border-bottom: 3px solid #00aaff;
+    }
+
+    .header-title h1 {
+      font-size: 2em;
+      color: #00ccff;
+      text-shadow: 0 0 8px rgba(0, 200, 255, 0.6);
+    }
+
+    .logout-btn {
+      background: #ff3333;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 0.95em;
+    }
+
+    .logout-btn:disabled {
+      background: #555;
+      cursor: not-allowed;
+    }
+
+    .marquee-container {
+      background: rgba(0, 20, 40, 0.9);
+      padding: 8px;
+      border-bottom: 2px solid #00aaff;
+      margin-bottom: 12px;
+    }
+
+    .marquee-text {
+      color: #00e0ff;
+      font-size: 1.1em;
+      font-weight: bold;
+      letter-spacing: 2px;
+      white-space: nowrap;
+    }
+
+    .navbar {
+      display: flex;
+      overflow-x: auto;
+      background: rgba(5, 15, 35, 0.95);
+      border-bottom: 2px solid #00aaff;
+      padding: 12px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-link {
+      color: #a0d4ff;
+      text-decoration: none;
+      padding: 12px 20px;
+      font-size: 1.2em;
+      font-weight: bold;
+      white-space: nowrap;
+      border-radius: 6px;
+      margin: 0 6px;
+      cursor: pointer;
+    }
+
+    .nav-link.active {
+      background: rgba(0, 170, 255, 0.3);
+      color: white;
+      text-shadow: 0 0 8px #00ccff;
+    }
+
+    .content-section {
+      display: none;
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 25px;
+      background: rgba(10, 25, 50, 0.85);
+      border: 2px solid #00aaff;
+      border-radius: 10px;
+    }
+
+    .content-section.active {
+      display: block;
+      animation: fadeIn 0.6s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h2 {
+      color: #00ccff;
+      text-align: center;
+      margin: 15px 0 20px;
+      font-size: 1.8em;
+    }
+
+    /* ✅ FOTO DI INFORMASI — UKURAN KONSISTEN */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-top: 15px;
+      padding: 0 10px;
+    }
+
+    .info-item {
+      text-align: center;
+    }
+
+    .info-item img {
+ 
+      width: 100%;
+ 
+      height: auto; /* ✅ Ikuti rasio asli */
+  
+      object-fit: fill; /* Tidak perlu, karena height: auto */
+  
+      border: 2px solid #00aaff;
+  
+      border-radius: 0;
+  
+      display: block;
+}
+
+    .info-item .label {
+      margin-top: 10px;
+      font-size: 1em;
+      color: #a0d4ff;
+    }
+
+    .info-item .label strong {
+      color: #00ccff;
+      display: block;
+      font-size: 1.1em;
+      margin-bottom: 4px;
+    }
+
+    /* CHAT */
+    #chatBox {
+      height: 300px;
+      overflow-y: auto;
+      background: rgba(0, 20, 40, 0.6);
+      border: 1px solid #00aaff;
+      padding: 10px;
+      margin-top: 15px;
+      border-radius: 0;
+    }
+
+    .chat-message {
+      padding: 10px;
+      margin-bottom: 10px;
+      background: rgba(0, 100, 180, 0.4);
+      border-radius: 8px;
+      position: relative;
+      word-wrap: break-word;
+    }
+
+    .chat-message.own {
+      background: rgba(0, 150, 136, 0.5);
+      margin-left: 20%;
+    }
+
+    .delete-btn {
+      position: absolute;
+      top: 5px;
+      right: 8px;
+      background: #ff4444;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      width: 24px;
+      height: 24px;
+      font-size: 12px;
+      cursor: pointer;
+      display: none;
+    }
+
+    .chat-message:hover .delete-btn {
+      display: block;
+    }
+
+    .chat-form textarea {
+      padding: 10px;
+      background: rgba(0, 30, 60, 0.7);
+      border: 1px solid #00aaff;
+      color: white;
+      border-radius: 6px;
+      font-family: inherit;
+      resize: vertical;
+      min-height: 60px;
+      width: 100%;
+    }
+
+    .send-btn {
+      margin-top: 10px;
+      padding: 12px;
+      background: #00aaff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #66b2ff;
+      font-size: 0.95em;
+      border-top: 1px solid #004066;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- LOGIN PAGE -->
+  <div id="loginPage">
+    <div class="login-logo">ROLIN'S CRIPS 60TH</div>
+    <div class="login-warning">
+      ⚠️ JIKA SUDAH BIKIN NAMA DI SINI TIDAK BISA DI GANTI.<br>
+      KASIH NAMA YANG BENER!
+    </div>
+    <div class="login-box">
+      <div class="account-list" id="accountHistory"></div>
+      <input type="text" id="loginName" placeholder="Atau masukkan nama baru (2-20 karakter)" maxlength="20">
+      <button class="login-btn" id="loginBtn">GUNAKAN NAMA INI</button>
+    </div>
+  </div>
+
+  <!-- MAIN APP -->
+  <div id="app">
+    <header>
+      <div class="header-title">
+        <h1>ROLIN'S CRIPS 60TH</h1>
+      </div>
+      <button class="logout-btn" id="logoutBtn">Ganti Akun</button>
+    </header>
+
+    <div class="marquee-container">
+      <marquee class="marquee-text" behavior="scroll" direction="left" scrollamount="4">
+        BLUE TIL I DIE | LOYALTY SINCE 1965 | ROLIN'S CRIPS 60TH
+      </marquee>
+    </div>
+
+    <nav class="navbar">
+      <a class="nav-link active" data-target="pentinggi">PENTINGGI</a>
+      <a class="nav-link" data-target="informasi">INFORMASI</a>
+      <a class="nav-link" data-target="asal-usul">ASAL USUL</a>
+      <a class="nav-link" data-target="bertanya">BERTANYA</a>
+      <a class="nav-link" data-target="link-dc">LINK DC</a>
+    </nav>
+
+    <!-- PENTINGGI -->
+    <section id="pentinggi" class="content-section active">
+      <h2>PENTINGGI</h2>
+      <div style="background:rgba(0,30,60,0.6); padding:15px; margin:15px auto; border-left:3px solid #00aaff; max-width:600px; border-radius:0 8px 8px 0;">
+        <h3>Mateo_Walker Dan Endang_Kostelo</h3><p>Pendiri & pemimpin utama.</p>
+      </div>
+      <div style="background:rgba(0,30,60,0.6); padding:15px; margin:15px auto; border-left:3px solid #00aaff; max-width:600px; border-radius:0 8px 8px 0;">
+        <h3>Ian_Manzy</h3><p>Tangan Kanan.</p>
+      </div>
+      <div style="background:rgba(0,30,60,0.6); padding:15px; margin:15px auto; border-left:3px solid #00aaff; max-width:600px; border-radius:0 8px 8px 0;">
+        <h3>Ridwan_Jhon</h3><p>Tangan kiri.</p>
+      </div>
+    </section>
+
+    <!-- INFORMASI -->
+    <section id="informasi" class="content-section">
+      <h2>INFORMASI</h2>
+      <div class="info-grid">
+        <!-- Ganti URL di bawah ini dengan link fotomu -->
+        <div class="info-item">
+          <img src="https://i.ibb.co/DfC5thQP/IMG-20241228-200228.jpg" alt="WILAYAH">
+          <div class="label"><strong>WILAYAH</strong>Las Venturas Whitewood</div>
+        </div>
+        <div class="info-item">
+         <img src="https://i.ibb.co/fdScD6Tp/Desain-tanpa-judul-1.png" alt="Warna">
+          <div class="label"><strong>IDENTITAS</strong>ROLINS</div>
+        </div>
+        <div class="info-item">
+          <img src="https://i.ibb.co/wFX1mjDS/sa-mp-108.png" alt="Tahun">
+          <div class="label"><strong>BERDIRI</strong>1965</div>
+        </div>
+        <div class="info-item">
+         <img src="https://i.ibb.co/9HvVXBR7/IMG-20250804-WA0032.jpg" alt="Logo">
+          <div class="label"><strong>LOGO</strong>Crips 60th</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ASAL USUL -->
+    <section id="asal-usul" class="content-section">
+      <h2>ASAL USUL</h2>
+      <p style="text-align:center; font-size:1.15em; color:#e0f0ff; line-height:1.7; padding:0 10px;">
+        Amidst the chaos caused by the pandemic in Las Venturas, where everyone was lost and the economy was collapsing, a group of street youths from the Old Venturas Strip formed a gang called ROLIN'S CRIPS 60TH, led by the calm but sharp Mateo, with his second-in-command, Endang, a brutal but loyal figure. Starting out hanging out in the back alleys of closed casinos, they began to unite hopeless street kids, forming strong bonds, marking their territory with blue, and maintaining strict discipline. This gang is not only a symbol of rebellion, but also resistance to social injustice during the crisis. The name ROLIN'S CRIPS 60TH slowly echoed throughout Las Venturas as one of the most respected gangs during the pandemic.
+      </p>
+    </section>
+
+    <!-- BERTANYA -->
+    <section id="bertanya" class="content-section">
+      <h2>BERTANYA</h2>
+      <p style="text-align:center; margin-bottom:15px;">Kirim pesanmu di sini. Semua orang bisa bertanya!</p>
+      <div id="chatBox"></div>
+      <form id="chatForm" class="chat-form">
+        <textarea id="chatMessage" placeholder="Tulis pesan atau pertanyaanmu..." required maxlength="200"></textarea>
+        <button type="submit" class="send-btn">KIRIM</button>
+      </form>
+    </section>
+
+    <!-- LINK DISCORD -->
+    <section id="link-dc" class="content-section">
+      <h2>DISCORD</h2>
+      <p style="text-align:center; margin-bottom:20px;">Klik tombol di bawah untuk bergabung!</p>
+      <a href="https://discord.gg/4kkPw3zytW" target="_blank" 
+         style="display:inline-block; padding:12px 24px; background:#5865F2; color:white; text-decoration:none; border-radius:8px; font-weight:bold; font-size:1.2em;">
+        JOIN DISCORD
+      </a>
+    </section>
+
+    <footer>
+      <p>© 2025 ROLIN'S CRIPS 60TH – Blue Til I Die.</p>
+    </footer>
+  </div>
+
+  <script>
+    const loginPage = document.getElementById('loginPage');
+    const app = document.getElementById('app');
+    const loginBtn = document.getElementById('loginBtn');
+    const logoutBtn = document.getElementById('logoutBtn');
+    const loginNameInput = document.getElementById('loginName');
+    const accountHistory = document.getElementById('accountHistory');
+
+    // === LOAD AKUN LAMA ===
+    function loadAccountHistory() {
+      const accounts = JSON.parse(localStorage.getItem('accountHistory') || '[]');
+      accountHistory.innerHTML = '';
+      if (accounts.length > 0) {
+        const title = document.createElement('div');
+        title.textContent = 'Pilih akun lama:';
+        title.style.marginBottom = '10px';
+        title.style.fontWeight = 'bold';
+        accountHistory.appendChild(title);
+
+        accounts.forEach(acc => {
+          const div = document.createElement('div');
+          div.className = 'account-item';
+          div.textContent = acc;
+          div.onclick = () => useAccount(acc);
+          accountHistory.appendChild(div);
+        });
+      }
+    }
+
+    function useAccount(name) {
+      localStorage.setItem('userName', name);
+      window.userName = name;
+      loginPage.style.display = 'none';
+      app.style.display = 'block';
+      loadChat();
+    }
+
+    // === CEK LOGIN SAAT BUKA ===
+    const savedName = localStorage.getItem('userName');
+    const switchCount = parseInt(localStorage.getItem('switchCount') || '0');
+
+    if (savedName) {
+      window.userName = savedName;
+      loginPage.style.display = 'none';
+      app.style.display = 'block';
+      loadChat();
+    } else {
+      loadAccountHistory();
+    }
+
+    if (switchCount >= 5) {
+      logoutBtn.disabled = true;
+      logoutBtn.title = 'Batas ganti akun: 5x';
+    }
+
+    // === LOGIN BARU ===
+    loginBtn.addEventListener('click', () => {
+      const name = loginNameInput.value.trim();
+      if (name.length >= 2 && name.length <= 20) {
+        // Simpan ke riwayat
+        let accounts = JSON.parse(localStorage.getItem('accountHistory') || '[]');
+        if (!accounts.includes(name)) {
+          accounts.unshift(name);
+          if (accounts.length > 10) accounts.pop(); // batas 10 akun lama
+          localStorage.setItem('accountHistory', JSON.stringify(accounts));
+        }
+        useAccount(name);
+      } else {
+        alert('Nama harus 2–20 karakter!');
+      }
+    });
+
+    loginNameInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') loginBtn.click();
+    });
+
+    // === GANTI AKUN ===
+    logoutBtn.addEventListener('click', () => {
+      let count = parseInt(localStorage.getItem('switchCount') || '0');
+      if (count >= 5) {
+        alert('Kamu sudah ganti akun 5 kali. Tidak bisa ganti lagi.');
+        return;
+      }
+      if (confirm('Anda yakin mau ganti akun?\nBatas ganti akun: 5x.')) {
+        count++;
+        localStorage.setItem('switchCount', count.toString());
+        localStorage.removeItem('userName');
+        app.style.display = 'none';
+        loginPage.style.display = 'flex';
+        loginNameInput.value = '';
+        loadAccountHistory();
+        if (count >= 5) {
+          logoutBtn.disabled = true;
+          logoutBtn.title = 'Batas ganti akun: 5x';
+        }
+      }
+    });
+
+    // === CHAT ===
+    function loadChat() {
+      const chatBox = document.getElementById('chatBox');
+      chatBox.innerHTML = '';
+      const messages = JSON.parse(localStorage.getItem('chatMessages') || '[]');
+      messages.forEach((msg, index) => {
+        const msgDiv = document.createElement('div');
+        msgDiv.className = 'chat-message ' + (msg.name === window.userName ? 'own' : '');
+        msgDiv.innerHTML = `
+          <strong>[${msg.time}] ${msg.name}:</strong> ${msg.text}
+          ${msg.name === window.userName ? `<button class="delete-btn" data-index="${index}">🗑️</button>` : ''}
+        `;
+        chatBox.appendChild(msgDiv);
+      });
+
+      document.querySelectorAll('.delete-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const index = parseInt(btn.getAttribute('data-index'));
+          let msgs = JSON.parse(localStorage.getItem('chatMessages') || '[]');
+          msgs.splice(index, 1);
+          localStorage.setItem('chatMessages', JSON.stringify(msgs));
+          loadChat();
+        });
+      });
+
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    document.getElementById('chatForm')?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const text = document.getElementById('chatMessage').value.trim();
+      if (text && window.userName) {
+        const now = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        const newMsg = { name: window.userName, text, time: now };
+        const messages = JSON.parse(localStorage.getItem('chatMessages') || '[]');
+        messages.push(newMsg);
+        localStorage.setItem('chatMessages', JSON.stringify(messages));
+        loadChat();
+        document.getElementById('chatForm').reset();
+      }
+    });
+
+    // === NAVIGASI ===
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+        document.querySelectorAll('.content-section').forEach(sec => sec.classList.remove('active'));
+        this.classList.add('active');
+        document.getElementById(this.getAttribute('data-target')).classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
